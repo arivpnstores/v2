@@ -1,0 +1,108 @@
+#!/bin/bash
+clear
+RED='\033[0;31m'
+NC='\e[0m'
+gray="\e[1;30m"
+Blue="\033[1;36m"
+GREEN='\033[1;32m'
+Y="\033[1;33m"
+BGX="\033[42m"
+
+UPDATE="https://raw.githubusercontent.com/arivpnstores/v2/main/files/"
+#BOT="https://raw.githubusercontent.com/myridwan/src/ipuk/"
+UDPCORE="https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1S3IE25v_fyUfCLslnujFBSBMNunDHDk2' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1S3IE25v_fyUfCLslnujFBSBMNunDHDk2"
+clear
+echo -e "\033[96;1m                           FEATURES                             $NC"
+echo -e " "
+echo -e "  ${Y}01.) ${NC}${GREEN}RUNNING SERVICE${NC}"
+echo -e "  ${Y}02.) ${NC}${GREEN}INSTALL UDP ${NC}"
+echo -e "  ${Y}03.) ${NC}${GREEN}Registrasi IP VPS${NC}"
+echo -e "  ${Y}04.) ${NC}${GREEN}Update Script ${NC}"
+echo -e "  ${Y}05.) ${NC}${GREEN}RESTART SERVICE${NC}"
+echo -e "  ${Y}06.) ${NC}${GREEN}CHANGE BANNER${NC}"
+echo -e "  ${Y}07.) ${NC}${GREEN}CHANGE DOMAIN${NC}"
+echo -e "  ${Y}08.) ${NC}${GREEN}FIXX POINTING DOMAIN${NC}"
+echo -e "  ${Y}09.) ${NC}${GREEN}CLEAR LOGS${NC}"
+echo -e "  ${Y}10.) ${NC}${GREEN}CLEAR CACHE${NC}"
+echo -e "  ${Y}11.) ${NC}${GREEN}BCKUP/RESTORE BOT ${NC}"
+echo -e "  ${Y}12.) ${NC}${GREEN}DELL ALL EXP${NC}"
+echo -e "  ${Y}13.) ${NC}${GREEN}Add Bot Notifikasi ${NC}"
+echo -e "  ${Y}14.) ${NC}${GREEN}MONITOR${NC}"
+echo -e "  ${Y}15.) ${NC}${GREEN}INSTALL DNS NONTON ${NC}"
+echo -e "  ${Y}16.) ${NC}${GREEN}IINSTALL PANEL ${NC}"
+echo -e "  ${Y}17.) ${NC}${GREEN}SPEEDTEST ${NC}"
+echo -e "  ${Y}18.) ${NC}${GREEN}AUTO REBOOT ${NC}"
+echo -e "  ${Y}19.) ${NC}${GREEN}INFO PORT ${NC}"
+echo -e "  ${Y}20.) ${NC}${GREEN}MENU PANEL${NC}"
+echo -e " \033[95;m══════════════════════════════════════════════════════════${NC}"
+echo -e " "
+echo -e "  ${Y}                         [x]${NC}${GREEN} Back To Menu${NC}"
+echo -e " "
+echo -e " \033[95;1m══════════════════════════════════════════════════════════${NC}"
+echo -e " "
+read -p "  Select options >>>  " menu
+case $menu in
+1) clear ;
+    run
+    ;;
+2) clear ;
+    wget --load-cookies /tmp/cookies.txt ${UDPCORE} -O install-udp && rm -rf /tmp/cookies.txt && chmod +x install-udp && ./install-udp
+    ;;
+3) clear ;
+    add-ip
+    ;;    
+4) clear ;   
+    wget ${UPDATE}update.sh && chmod +x update.sh && ./update.sh
+    ;;
+5) clear ;    
+    reset
+    ;;
+6) clear ;   
+    nano /etc/banner.txt
+    ;;
+7) clear ; 
+    addhost
+    ;;
+8) clear ;
+   fixcert
+   ;;
+9) clear ;
+   clearlog
+   ;;
+10) clear ;
+   clearcache
+   ;;
+11) clear ;
+   mbot
+   ;;
+12) clear ;
+   xp
+    ;;
+13) clear ;
+   bot
+   ;;
+14) clear ;
+   gotop
+   ;;
+15) clear ;
+   wget https://raw.githubusercontent.com/Jengkolonline/nonton/main/nf.sh && chmod +x nf.sh && ./nf.sh
+   ;;
+16) clear ;
+   m-panel
+   ;;
+17) clear ;
+   speedtest
+   ;;      
+18) clear ;
+   autoreboot
+   ;;  
+19) clear ;
+   prot
+   ;;
+20) clear ;
+   m-panel
+  ;;
+*) clear ;
+    menu
+    ;;
+esac

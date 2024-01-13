@@ -1,0 +1,743 @@
+#!/bin/bash
+#IZIN SCRIPT
+MYIP=$(curl -sS ipv4.icanhazip.com)
+echo -e "\e[32mloading...\e[0m"
+clear
+# Valid Script
+ipsaya=$(wget -qO- ipinfo.io/ip)
+data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+date_list=$(date +"%Y-%m-%d" -d "$data_server")
+data_ip="https://raw.githubusercontent.com/arivpnstores/v2/main/REGIST"
+checking_sc() {
+  useexp=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $3}')
+  if [[ $date_list < $useexp ]]; then
+    echo -ne
+  else
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e "\033[42m          404 NOT FOUND AUTOSCRIPT          \033[0m"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e ""
+    echo -e "            ${RED}PERMISSION DENIED !${NC}"
+    echo -e "   \033[0;33mYour VPS${NC} $ipsaya \033[0;33mHas been Banned${NC}"
+    echo -e "     \033[0;33mBuy access permissions for scripts${NC}"
+    echo -e "             \033[0;33mContact Admin :${NC}"
+    echo -e "      \033[0;36mTelegram${NC} t.me/ARI_VPN_STORE"
+    echo -e "      ${GREEN}WhatsApp${NC} wa.me/6281327393959"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    exit
+  fi
+}
+checking_sc
+clear
+
+# // addtr
+function addtr(){
+clear
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+clear
+#IZIN SCRIPT
+MYIP=$(curl -sS ipv4.icanhazip.com)
+clear
+ISP=$(cat /etc/xray/isp)
+CITY=$(cat /etc/xray/city)
+# // 
+clear
+source /var/lib/kyt/ipvps.conf
+if [[ "$IP" = "" ]]; then
+domain=$(cat /etc/xray/domain)
+else
+domain=$IP
+fi
+#tr="$(cat ~/log-install.txt | grep -w "Trojan WS " | cut -d: -f2|sed 's/ //g')"
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
+clear
+  echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m"
+  echo -e "    \033[1;96m              CREATE TITLE XRAY / TROJAN \033[0m"
+  echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m"
+  echo -e ""
+		read -rp "USERNAME :   " -e user
+		user_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+
+		if [[ ${user_EXISTS} == '1' ]]; then
+clear
+            echo ""
+            echo ""
+			echo -e "\033[1;91mSorry, this name already exists"
+			echo ""
+			sleep 3
+addtr
+		fi
+	done
+
+uuid=$(cat /proc/sys/kernel/random/uuid)
+read -p "EXPIRED (DAY) : " masaaktif
+read -p "LIMIT QUOTA(GB): " Quota
+read -p "LIMIT DEVIC IPP :  " iplimit
+tgl=$(date -d "$masaaktif days" +"%d")
+bln=$(date -d "$masaaktif days" +"%b")
+thn=$(date -d "$masaaktif days" +"%Y")
+expe="$tgl $bln, $thn"
+tgl2=$(date +"%d")
+bln2=$(date +"%b")
+thn2=$(date +"%Y")
+tnggl="$tgl2 $bln2, $thn2"
+exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+sed -i '/#trojanws$/a\#! '"$user $exp"'\
+},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#trojangrpc$/a\#! '"$user $exp"'\
+},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+
+# Link Trojan Akun
+systemctl restart xray
+trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"
+trojanlink="trojan://${uuid}@bugkamu.com:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+trojanlink2="trojan://${uuid}@${domain}:80?path=%2Ftrojan-ws&security=none&host=${domain}&type=ws#${user}"
+
+cat >/var/www/html/trojan-$user.txt <<-END
+---------------------------------------------------
+  Format Trojan
+---------------------------------------------------
+
+# Format Trojan GO/WS
+
+- name: Trojan-$user-GO/WS
+  server: ${domain}
+  port: 443
+  type: trojan
+  password: ${uuid}
+  network: ws
+  sni: ${domain}
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /trojan-ws
+    headers:
+        Host: ${domain}
+
+# Format Trojan gRPC
+
+- name: Trojan-$user-gRPC
+  type: trojan
+  server: ${domain}
+  port: 443
+  password: ${uuid}
+  udp: true
+  sni: ${domain}
+  skip-cert-verify: true
+  network: grpc
+  grpc-opts:
+    grpc-service-name: trojan-grpc
+END
+
+TEXT="
+<code>---------------------------------------------------</code>
+<code>Link Akun Trojan </code>
+<code>---------------------------------------------------</code>
+<code>Link WS          : </code>
+<code>${trojanlink}</code>
+<code>---------------------------------------------------</code>
+<code>Link GRPC        : </code>
+<code>${trojanlink1}</code>
+<code>---------------------------------------------------</code>
+"
+
+
+
+systemctl reload xray
+systemctl reload nginx
+service cron restart
+trojanlink="trojan://${uuid}@${domain}:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=${domain}#${user}"
+if [ ! -e /etc/trojan ]; then
+  mkdir -p /etc/trojan
+fi
+
+if [[ $iplimit -gt 0 ]]; then
+mkdir -p /etc/kyt/limit/trojan/ip
+echo -e "$iplimit" > /etc/kyt/limit/trojan/ip/$user
+else
+echo > /dev/null
+fi
+
+if [ -z ${Quota} ]; then
+  Quota="0"
+fi
+
+c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
+d=$((${c} * 1024 * 1024 * 1024))
+
+if [[ ${c} != "0" ]]; then
+  echo "${d}" >/etc/trojan/${user}
+fi
+DATADB=$(cat /etc/trojan/.trojan.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
+if [[ "${DATADB}" != '' ]]; then
+  sed -i "/\b${user}\b/d" /etc/trojan/.trojan.db
+fi
+echo "### ${user} ${exp} ${uuid} ${Quota} ${iplimit}" >>/etc/trojan/.trojan.db
+curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL
+clear
+echo -e ""
+echo -e "--------------------------------------------------------------"
+echo -e "                    XRAY TROJAN "
+echo -e "--------------------------------------------------------------"
+echo -e "Remarks          : ${user}" 
+echo -e "Host/IP          : ${domain}"
+echo -e "User Quota       : ${Quota} GB"
+echo -e "User Ip          : ${iplimit} IP"
+echo -e "Port NTLS        : 443-900" 
+echo -e "port None TLS/WS : 80,8880,8080"
+echo -e "Key              : ${uuid}" 
+echo -e "Localtions       : $CITY"
+echo -e "ISP              : $ISP"
+echo -e "Path             : /trojan-ws" 
+echo -e "ServiceName      : trojan-grpc" 
+echo -e "--------------------------------------------------------------"
+echo -e "Link WS          : ${trojanlink}" 
+echo -e "--------------------------------------------------------------"
+echo -e "Link None TLS     : ${trojanlink2}" 
+echo -e "--------------------------------------------------------------"
+echo -e "Link GRPC        : ${trojanlink1}" 
+echo -e "--------------------------------------------------------------"
+echo -e "Format OpenClash : https://${domain}:81/trojan-$user.txt" 
+echo -e "--------------------------------------------------------------"
+echo -e "Aktif Selama     : $masaaktif Hari"
+echo -e "Dibuat Pada      : $tnggl"
+echo -e "Berakhir Pada    : $expe" 
+echo -e "--------------------------------------------------------------"
+echo -e ""
+read -p "press [ ENTER ] to Menu"
+menu
+}
+# // trialtr
+function trialtr(){
+clear
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+clear
+#IZIN SCRIPT
+MYIP=$(curl -sS ipv4.icanhazip.com)
+
+clear
+# // Create Trial Trojan
+
+domain=$(cat /etc/xray/domain)
+masaaktif=1
+Quota=1
+iplimit=3
+user=LT-`</dev/urandom tr -dc 0-9 | head -c3`
+clear
+uuid=$(cat /proc/sys/kernel/random/uuid)
+exp=$(date -d "$masaaktif days" +"%Y-%m-%d")
+tgl=$(date -d "$masaaktif days" +"%d")
+bln=$(date -d "$masaaktif days" +"%b")
+thn=$(date -d "$masaaktif days" +"%Y")
+expe="$tgl $bln, $thn"
+tgl2=$(date +"%d")
+bln2=$(date +"%b")
+thn2=$(date +"%Y")
+tnggl="$tgl2 $bln2, $thn2"
+sed -i '/#trojanws$/a\#! '"$user $exp"'\
+},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#trojangrpc$/a\#! '"$user $exp"'\
+},{"password": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+# Link Trojan Akun
+systemctl restart xray
+trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"
+trojanlink="trojan://${uuid}@bugkamu.com:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+trojanlink2="trojan://${uuid}@${domain}:80?path=%2Ftrojan-ws&security=none&host=${domain}&type=ws#${user}"
+
+cat >/var/www/html/trojan-$user.txt <<-END
+---------------------------------------------------
+# Format Trojan GO/WS
+---------------------------------------------------
+- name: Trojan-$user-GO/WS
+  server: ${domain}
+  port: 443
+  type: trojan
+  password: ${uuid}
+  network: ws
+  sni: ${domain}
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /trojan-ws
+    headers:
+        Host: ${domain}
+
+# Format Trojan gRPC
+
+- name: Trojan-$user-gRPC
+  type: trojan
+  server: ${domain}
+  port: 443
+  password: ${uuid}
+  udp: true
+  sni: ${domain}
+  skip-cert-verify: true
+  network: grpc
+  grpc-opts:
+    grpc-service-name: trojan-grpc
+
+---------------------------------------------------
+Link Akun Trojan 
+---------------------------------------------------
+Link WS          : 
+${trojanlink}
+---------------------------------------------------
+Link GRPC        : 
+${trojanlink1}
+---------------------------------------------------
+
+END
+
+service cron restart
+trojanlink="trojan://${uuid}@${domain}:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=${domain}#${user}"
+if [ ! -e /etc/trojan ]; then
+  mkdir -p /etc/trojan
+fi
+
+if [[ $iplimit -gt 0 ]]; then
+mkdir -p /etc/kyt/limit/trojan/ip
+echo -e "$iplimit" > /etc/kyt/limit/trojan/ip/$user
+else
+echo > /dev/null
+fi
+
+if [ -z ${Quota} ]; then
+  Quota="0"
+fi
+
+c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
+d=$((${c} * 1024 * 1024 * 1024))
+
+if [[ ${c} != "0" ]]; then
+  echo "${d}" >/etc/trojan/${user}
+fi
+DATADB=$(cat /etc/trojan/.trojan.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
+if [[ "${DATADB}" != '' ]]; then
+  sed -i "/\b${user}\b/d" /etc/trojan/.trojan.db
+fi
+echo "### ${user} ${exp} ${uuid} ${Quota} ${iplimit}" >>/etc/trojan/.trojan.db
+curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL
+clear
+echo -e ""
+echo -e "--------------------------------------------------------------"
+echo -e "                     TRIALL TROJAN           "
+echo -e "--------------------------------------------------------------"
+echo -e "Remarks          : ${user}" 
+echo -e "Host/IP          : ${domain}"
+echo -e "User Quota       : ${Quota} GB"
+echo -e "User IP          : ${iplimit} IP"
+echo -e "Port NTLS        : 443" 
+echo -e "port None TLS/WS : 80,8880,8080"
+echo -e "Key              : ${uuid}" 
+echo -e "Path             : /trojan-ws" 
+echo -e "ServiceName      : trojan-grpc" 
+echo -e "--------------------------------------------------------------"
+echo -e "Link WS          : ${trojanlink}" 
+echo -e "--------------------------------------------------------------"
+echo -e "Link None Ws     : ${trojanlink2}" 
+echo -e "--------------------------------------------------------------"
+echo -e "Link GRPC        : ${trojanlink1}" 
+echo -e "--------------------------------------------------------------"
+echo -e "Format OpenClash : https://${domain}:81/trojan-$user.txt" 
+echo -e "--------------------------------------------------------------"
+echo -e "Aktif Selama     : $masaaktif Hari"
+echo -e "Dibuat Pada      : $tnggl"
+echo -e "Berakhir Pada    : $expe"
+echo -e "---------------------------------------------------------------"
+echo -e ""
+read -p "press !! [ ENTER ] To Menu"
+menu
+}
+# // deltr
+function deltr(){
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
+# Color
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+green() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+clear
+
+
+NUMBER_OF_CLIENTS=$(grep -c -E "^#! " "/etc/xray/config.json")
+	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+		echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+        echo -e "         Hapus Akun Trojan             "
+        echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo ""
+		echo "Anda Tidak Memiliki Member Trojan"
+		echo ""
+		echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		read -n 1 -s -r -p "Press any key to back"
+        m-trojan
+	fi
+
+	clear
+	echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo -e "          Hapus Akun Trojan            "
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo "  User       Expired  " 
+	echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+	grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo ""
+    red "tap enter to go back"
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+	read -rp "Ketik Usernamenya : " user
+    if [ -z $user ]; then
+    m-trojan
+    else
+    exp=$(grep -wE "^#! $user" "/etc/xray/config.json" | cut -d ' ' -f 3 | sort | uniq)
+    sed -i "/^#! $user $exp/,/^},{/d" /etc/xray/config.json
+    sed -i "/### $user $exp/,/^},{/d" /etc/trojan/.trojan.db
+    rm -rf /etc/trojan/$user
+    rm -rf /etc/kyt/limit/trojan/ip/$user
+    systemctl restart xray > /dev/null 2>&1
+    clear
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo "  Akun Trojan Berhasil Di Hapus         "
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo " Client Name : $user"
+    echo " Expired On  : $exp"
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo ""
+    read -p "enter to menu"
+    menu
+    fi
+}
+# // renewtr
+function renewtr(){
+clear
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+green() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+
+clear
+
+NUMBER_OF_CLIENTS=$(grep -c -E "^#! " "/etc/xray/config.json")
+	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+		clear
+        echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+        echo -e "           Renew Trojan          \E[0m"
+        echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo ""
+		echo "You have no existing clients!"
+		echo ""
+		echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+        echo ""
+        read -n 1 -s -r -p "Press any key to back on menu"
+        menu
+	fi
+
+	clear
+	echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo -e "           Renew Trojan       \E[0m"
+    echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo ""
+  	grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo ""
+    red "tap enter to go back"
+    echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+	read -rp "Input Username : " user
+    if [ -z $user ]; then
+    menu
+    else
+    rm -f /etc/kyt/limit/trojan/ip/${user}
+    rm -f /etc/trojan/$user
+    read -p "Expired (days): " masaaktif
+    read -p "Limit User (GB): " Quota
+    read -p "Limit User (IP): " iplim
+    exp=$(grep -wE "^#! $user" "/etc/xray/config.json" | cut -d ' ' -f 3 | sort | uniq)
+    mkdir -p /etc/kyt/limit/trojan/ip
+echo ${iplim} >> /etc/kyt/limit/trojan/ip/${user}
+if [ ! -e /etc/trojan ]; then
+  mkdir -p /etc/trojan
+fi
+
+if [ -z ${Quota} ]; then
+  Quota="0"
+fi
+
+c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
+d=$((${c} * 1024 * 1024 * 1024))
+
+if [[ ${c} != "0" ]]; then
+  echo "${d}" >/etc/trojan/${user}
+fi
+    now=$(date +%Y-%m-%d)
+    d1=$(date -d "$exp" +%s)
+    d2=$(date -d "$now" +%s)
+    exp2=$(( (d1 - d2) / 86400 ))
+    exp3=$(($exp2 + $masaaktif))
+    exp4=`date -d "$exp3 days" +"%Y-%m-%d"`
+    sed -i "/#! $user/c\#! $user $exp4" /etc/xray/config.json
+    sed -i "/#! $user/c\#! $user $exp4" /root/akun/trojan/.trojan.conf
+    systemctl restart xray > /dev/null 2>&1
+    clear
+    echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo " Trojan Account Was Successfully Renewed"
+    echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo ""
+    echo " Client Name : $user"
+    echo " Expired On  : $exp4"
+    echo " User Quota  : $Quota"
+    echo " User Limit IP: $iplim"
+    echo ""
+    echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo ""
+    read -n 1 -s -r -p "Press any key to back on menu"
+    menu
+    fi
+}
+
+# // cektr
+function con() {
+    local -i bytes=$1;
+    if [[ $bytes -lt 1024 ]]; then
+        echo "${bytes}B"
+    elif [[ $bytes -lt 1048576 ]]; then
+        echo "$(( (bytes + 1023)/1024 ))KB"
+    elif [[ $bytes -lt 1073741824 ]]; then
+        echo "$(( (bytes + 1048575)/1048576 ))MB"
+    else
+        echo "$(( (bytes + 1073741823)/1073741824 ))GB"
+    fi
+}
+function cektr(){
+clear
+echo -n > /tmp/other.txt
+data=( `cat /etc/xray/config.json | grep '^#!' | cut -d ' ' -f 2 | sort | uniq`);
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e " \e[1;97;101m           CEK TROJAN ACCOUNT           \e[0m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+for akun in "${data[@]}"
+do
+if [[ -z "$akun" ]]; then
+akun="tidakada"
+fi
+echo -n > /tmp/iptrojan.txt
+data2=( `cat /var/log/xray/access.log | tail -n 500 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq`);
+for ip in "${data2[@]}"
+do
+jum=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 500 | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | grep -w "$ip" | sort | uniq)
+if [[ "$jum" = "$ip" ]]; then
+echo "$jum" >> /tmp/iptrojan.txt
+else
+echo "$ip" >> /tmp/other.txt
+fi
+jum2=$(cat /tmp/iptrojan.txt)
+sed -i "/$jum2/d" /tmp/other.txt > /dev/null 2>&1
+done
+jum=$(cat /tmp/iptrojan.txt)
+if [[ -z "$jum" ]]; then
+echo > /dev/null
+else
+iplimit=$(cat /etc/kyt/limit/trojan/ip/${akun})
+jum2=$(cat /tmp/iptrojan.txt | wc -l)
+byte=$(cat /etc/trojan/${akun})
+lim=$(con ${byte})
+wey=$(cat /etc/limit/trojan/${akun})
+gb=$(con ${wey})
+lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 500 | cut -d " " -f 2 | tail -1)
+echo -e " \033[1;36m┌──────────────────────────────────────┐\033[0m"
+printf "  %-13s %-7s %-8s %2s\n" "  UserName : ${akun}"
+printf "  %-13s %-7s %-8s %2s\n" "  Login    : $lastlogin"
+printf "  %-13s %-7s %-8s %2s\n" "  Usage Quota : ${gb}" 
+printf "  %-13s %-7s %-8s %2s\n" "  Limit Quota : ${lim}" 
+printf "  %-13s %-7s %-8s %2s\n" "  Limit IP : $iplimit" 
+printf "  %-13s %-7s %-8s %2s\n" "  Login IP : $jum2" 
+echo -e " \033[1;36m└──────────────────────────────────────┘\033[0m"
+fi 
+rm -rf /tmp/iptrojan.txt
+done
+rm -rf /tmp/other.txt
+echo ""
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo ""
+read -p "enter to menu"
+menu
+}
+# // user-tr
+function user-tr(){
+clear
+NUMBER_OF_CLIENTS=$(grep -c -E "^#! " "/etc/xray/config.json")
+        if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+    echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo -e " \e[1;97;101m               CONFIG TROJAN ACCOUNT                   \e[0m"
+    echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo ""
+    echo "You have no existing clients!"
+    echo ""
+    echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    read -n 1 -s -r -p "Press [ Enter ] to back on menu trojan"
+    trojan
+fi
+
+  echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+  echo -e " \e[1;97;101m                CONFIG TROJAN ACCOUNT                 \E[0m"
+  echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+        echo "     No  Expired   User"
+        grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | nl -s ') '
+        until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
+                if [[ ${CLIENT_NUMBER} == '1' ]]; then
+                        read -rp "Select one client [1]: " CLIENT_NUMBER
+                else
+                        read -rp "Select one client [1-${NUMBER_OF_CLIENTS}]: " CLIENT_NUMBER
+                fi
+        done
+user=$(grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
+iplim=$(cat /etc/kyt/limit/trojan/ip/$user)
+domain=$(cat /etc/xray/domain)
+uuid=$(grep -E "^### " "/etc/trojan/.trojan.db" | cut -d ' ' -f 4 | sed -n "${CLIENT_NUMBER}"p)
+Quota=$(grep -E "^### " "/etc/trojan/.trojan.db" | cut -d ' ' -f 5 | sed -n "${CLIENT_NUMBER}"p)
+exp=$(grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
+hariini=`date -d "0 days" +"%Y-%m-%d"`
+cat >/var/www/html/trojan-$user.txt <<-END
+◇━━━━━━━━━━━━━━━━━◇
+  Dragon Emperor Tunneling 
+◇━━━━━━━━━━━━━━━━━◇
+
+# Format Trojan GO/WS
+
+- name: Trojan-$user-GO/WS
+  server: ${domain}
+  port: 443
+  type: trojan
+  password: ${uuid}
+  network: ws
+  sni: ${domain}
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /trojan-ws
+    headers:
+        Host: ${domain}
+
+# Format Trojan gRPC
+
+- name: Trojan-$user-gRPC
+  type: trojan
+  server: ${domain}
+  port: 443
+  password: ${uuid}
+  udp: true
+  sni: ${domain}
+  skip-cert-verify: true
+  network: grpc
+  grpc-opts:
+  grpc-service-name: trojan-grpc
+  
+END
+trojanlink="trojan://${uuid}@${domain}:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=${domain}#${user}"
+trojanlink2="trojan://${uuid}@${domain}:80?path=%2Ftrojan-ws&security=none&host=${domain}&type=ws#${user}"
+clear
+echo -e ""
+echo -e "\033[1;93m====================\033[0m"
+echo -e " CREATE TROJAN ACCOUNT          "
+echo -e "\033[1;93m====================\033[0m"
+echo -e "Remarks          : ${user}" 
+echo -e "Host/IP          : ${domain}"
+echo -e "Host XrayDNS     : ${NS}"
+echo -e "Pub Key          : ${PUB}"
+echo -e "Quota            : ${Quota}"
+echo -e "Limit IP         : ${iplim}"
+echo -e "port TLS/WS      : 443" 
+echo -e "port None TLS/WS : 80,8880,8080"
+echo -e "port GRPC        : 443"
+echo -e "port OpenClash   : 443"
+echo -e "port CDN TLS/WS  : 443"
+echo -e "port None TLS/WS : 80,8880,8080"
+echo -e "port CDN Grpc    : 443"
+echo -e "Key              : ${uuid}" 
+echo -e "Security         : auto"
+echo -e "Network          : ws"
+echo -e "Dynamic          : http://bugmu.com/path"
+echo -e "Path             : /trojan-ws" 
+echo -e "ServiceName      : trojan-grpc" 
+echo -e "\033[0;34m====================\033[0m" 
+echo -e "Link WS          : ${trojanlink}" 
+echo -e "\033[0;34m====================\033[0m" 
+echo -e "Link None Ws     : ${trojanlink2}" 
+echo -e "\033[0;34m====================\033[0m" 
+echo -e "Link GRPC        : ${trojanlink1}" 
+echo -e "\033[0;34m====================\033[0m" 
+echo -e "Link CDN & OpenClash : https://${domain}:81/trojan-$user.txt"
+echo -e "\033[0;34m====================\033[0m"
+echo -e "Link Qris        :https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${trojanlink}"
+echo -e "\033[0;34m====================\033[0m"
+echo -e "Berakhir Pada    : $exp"
+echo -e "\033[0;34m====================\033[0m" 
+echo "" 
+read -n 1 -s -r -p "Press [ Enter ] to back on menu"
+menu
+}
+
+# // BOT
+export CHATID="6617783693"
+export KEY="6751589620:AAHwjP6dzZhuqeyUOdYFc6742Q1YUVF1EjM"
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+
+grenbo="\e[92;1m"
+NC='\033[0m'
+clear
+echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m"
+echo -e "\033[1;93m│$NC\e[96;1m          MENU MANAGER TRO                $NC"
+echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m"
+echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m"
+echo -e "\033[1;93m│  ${grenbo}1.${NC} \033[0;36mCreate Account Trojan ${NC}"
+echo -e "\033[1;93m│  ${grenbo}2.${NC} \033[0;36mTrial Account Trojan ${NC}"
+echo -e "\033[1;93m│  ${grenbo}3.${NC} \033[0;36mDelete Account Trojan ${NC}"
+echo -e "\033[1;93m│  ${grenbo}4.${NC} \033[0;36mRenew Account Trojan ${NC}"
+echo -e "\033[1;93m│  ${grenbo}5.${NC} \033[0;36mCheck Account Login Trojan ${NC}"
+echo -e "\033[1;93m│  ${grenbo}6.${NC} \033[0;36mChect Account Detail's Trojan ${NC}"
+echo -e "\033[1;93m│  ${grenbo}x.${NC} \033[0;36mComeBack${NC}"
+echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m"
+echo -e ""
+read -p "Select options >>>   " menu
+case $menu in
+1)
+    addtr
+    ;;
+2)
+    trialtr
+    ;;
+3)
+    deltr
+    ;;
+4)
+    renewtr
+    ;;
+5)
+    cektr
+    ;;
+6)
+    user-tr
+    ;;
+*)
+    menu
+    ;;
+esac
