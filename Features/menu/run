@@ -186,7 +186,7 @@ fi
 
 clear
 echo -e " ${PURPLE}┌────────────────────────────────────────────┐$NC"
-echo -e " ${PURPLE}│$NC$NC\033[96;1m                     SANZ TUNNELING                    $NC${PURPLE}│$NC"
+echo -e " ${PURPLE}│$NC$NC\033[96;1m                     ARI TUNNELING                    $NC${PURPLE}│$NC"
 echo -e " ${PURPLE}└────────────────────────────────────────────┘$NC"
 echo -e " ${PURPLE}┌────────────────────────────────────────────┐$NC"
 echo -e " ${PURPLE}│$NC Operating System$NC  $blue=$NC$yellow $(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')$NC"

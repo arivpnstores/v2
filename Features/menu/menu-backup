@@ -198,7 +198,7 @@ TEXT="
 <code>◇━━━━━━━━━━━━━━◇</code>
 <code>Restore Vps Done</code>
 <code>◇━━━━━━━━━━━━━━◇</code>
-<code>BY BOT : @Sanzstore21</code>
+<code>BY BOT : @ARI_VPN_STORE</code>
 "
 
 curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null

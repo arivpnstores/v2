@@ -36,7 +36,7 @@ clear;clear;clear
 
   # // Banner
 echo -e "${YELLOW}----------------------------------------------------------${NC}"
-echo -e "\033[46m              SANZ TUNNELING \033[0m"
+echo -e "\033[46m              ARI TUNNELING                                     \033[0m"
 echo -e "${YELLOW}----------------------------------------------------------${NC}"
 echo ""
 sleep 3
@@ -329,7 +329,7 @@ restart_system() {
 <code>Exp Sc : </code><code>$EXPSC</code>
 <code>────────────────────</code>
 <i>Automatic Notification from Github</i>
-"'&reply_markup={"inline_keyboard":[[{"text":"⭐ᴏʀᴅᴇʀ⭐","url":"https://t.me/sanzVPN"},{"text":"⭐ɪɴꜱᴛᴀʟʟ⭐","url":"https://wa.me/6282240074362"}]]}'
+"'&reply_markup={"inline_keyboard":[[{"text":"⭐ᴏʀᴅᴇʀ⭐","url":"https://t.me/ARI_VPN_STORE"},{"text":"⭐ɪɴꜱᴛᴀʟʟ⭐","url":"https://wa.me/6282240074362"}]]}'
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
 }
 clear
@@ -535,7 +535,7 @@ print_success "Password SSH"
 function udp_mini(){
 clear
 print_install "Memasang Service limit Quota"
-wget raw.githubusercontent.com/SANZVPNSTORE/V2/main/files/limit.sh && chmod +x limit.sh && ./limit.sh
+wget raw.githubusercontent.com/arivpnstores/v2/main/files/limit.sh && chmod +x limit.sh && ./limit.sh
 
 cd
 wget -q -O /usr/bin/limit-ip "${REPO}files/limit-ip"

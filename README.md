@@ -14,7 +14,7 @@
 ### TESTED ON OS 
 - UBUNTU 20
 - DEBIAN 10 ( Recomended )
-OWNER : SANZVPNREAL
+OWNER : ARISCTUNNEL V2
 ### PORT INFO
 ```
 - TROJAN WS  443 8443
@@ -33,12 +33,8 @@ OWNER : SANZVPNREAL
 - SLOWDNS 5300
 ```
 ### Author
-```
-```
-SANZ TELE :
+
+ARI TELE :
 
 <a href="https://t.me/ARI_VPN_STORE" target=”_blank”><img src="https://img.shields.io/static/v1?style=for-the-badge&logo=Telegram&label=Telegram&message=Click%20Here&color=blue"></a><br>
-```
-```
-``
-```
+
