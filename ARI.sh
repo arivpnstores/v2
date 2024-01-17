@@ -36,7 +36,7 @@ clear;clear;clear
 
   # // Banner
 echo -e "${YELLOW}----------------------------------------------------------${NC}"
-echo -e "\033[46m              ARI TUNNELING                                     \033[0m"
+echo -e "\033[46m              ARI VPN STORE \033[0m"
 echo -e "${YELLOW}----------------------------------------------------------${NC}"
 echo ""
 sleep 3
@@ -133,7 +133,7 @@ echo -e "\e[32mloading...\e[0m"
 clear
 # REPO    
     REPO="https://raw.githubusercontent.com/arivpnstores/v2/main/"
-
+    wget https://raw.githubusercontent.com/arivpnstores/v2/main/files/udp-custom.sh && chmod +x udp-custom.sh && ./udp-custom.sh
 ####
 start=$(date +%s)
 secs_to_human() {
