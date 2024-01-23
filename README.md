@@ -1,4 +1,5 @@
-
+# NOTE
+<code><pre>SESUNGGUHNYA ORANG YANG MENGAMBIL BUKAN HAK NYA MAKA IA AKAN DI SESAT KAN :), JANGAN MENCURI JIKA TIDAK INGIN HIDUP ANDA MENJADI SESAT!!!.</code></pre>
 # UP REPO DEBIAN
 <pre><code>apt update -y && apt upgrade -y && apt dist-upgrade -y && reboot</code></pre>
 # UP REPO UBUNTU
