@@ -1,12 +1,8 @@
 # NOTE
 <code><pre>SESUNGGUHNYA ORANG YANG MENGAMBIL BUKAN HAK NYA MAKA IA AKAN DI SESAT KAN :), JANGAN MENCURI JIKA TIDAK INGIN HIDUP ANDA MENJADI SESAT!!!.</code></pre>
-# UP REPO DEBIAN
-<pre><code>apt update -y && apt upgrade -y && apt dist-upgrade -y && reboot</code></pre>
-# UP REPO UBUNTU
-<pre><code>apt update && apt upgrade -y && update-grub && sleep 2 && reboot</pre></code>
 
 ### INSTALL SCRIPT 
-<pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://raw.githubusercontent.com/arivpnstores/v2/main/ARI.sh && chmod +x ARI.sh && ./ARI.sh
+<pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://arisctunnel.xyz/ARI.sh && chmod +x ARI.sh && ./ARI.sh
 </code></pre>
 
 ### PERINTAH UPDATE 
