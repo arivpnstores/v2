@@ -1,6 +1,3 @@
-# NOTE
-<code><pre>SESUNGGUHNYA ORANG YANG MENGAMBIL BUKAN HAK NYA MAKA IA AKAN DI SESAT KAN :), JANGAN MENCURI JIKA TIDAK INGIN HIDUP ANDA MENJADI SESAT!!!.</code></pre>
-
 ### INSTALL SCRIPT 
 <pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://arisctunnel.xyz/ARI.sh && chmod +x ARI.sh && ./ARI.sh
 </code></pre>
