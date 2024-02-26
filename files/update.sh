@@ -1,4 +1,6 @@
 #!/bin/bash
+BG_RED="\033[41;97;1m" # BG MERAH
+NC='\033[0m'
 cd /usr/local/
 rm -rf sbin
 rm -rf /usr/bin/enc
@@ -36,11 +38,8 @@ fun_bar() {
 }
 res1() {
     wget https://raw.githubusercontent.com/arivpnstores/v2/main/Features/menu.zip
-    wget -q -O /usr/bin/enc "https://raw.githubusercontent.com/arivpnstores/v2/main/enc/encrypt" ; chmod +x /usr/bin/enc
-    7z e -paskykenza123 menu.zip
     unzip menu.zip
     chmod +x menu/*
-    enc menu/*
     mv menu/* /usr/local/sbin
     rm -rf menu
     rm -rf menu.zip
@@ -49,10 +48,10 @@ res1() {
 netfilter-persistent
 clear
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e " \e[1;97;101m          UPDATE SCRIPT       \e[0m"
+echo -e "${BG_RED}              UPDATE SCRIPT                $NC"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-echo -e "  \033[1;91m update script service\033[1;37m"
+echo -e " \033[1;91mupdate script service \033[1;37m"
 fun_bar 'res1'
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
