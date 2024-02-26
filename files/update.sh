@@ -48,7 +48,7 @@ res1() {
 netfilter-persistent
 clear
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "${BG_RED}              UPDATE SCRIPT                $NC"
+echo -e "${BG_RED}              UPDATE SCRIPT               $NC"
 echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " \033[1;91mupdate script service \033[1;37m"
